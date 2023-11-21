@@ -18,3 +18,4 @@ def dilatation(imgname):
     img = cv2.imread(f'immages-test/{imgname}')
     kernel = np.ones((5,5), np.uint8)
     imgchanged=cv2.dilate(img, kernel, iterations=1)
+    cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)

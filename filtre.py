@@ -24,3 +24,8 @@ def rotate(imgname,angle):
     img=Image.open (f'immages-test/{imgname}')
     imgchanged= img.rotate(angle)
     imgchanged.save(f'./images-changed/{imgname}-totate-{angle}°.png','png')
+
+def redimention(imgname):
+    img = Image.open (f'immages-test/{imgname}')
+    imgchanged = img.resize((256, 256))
+    imgchanged.save(f'./images-changed/{imgname}-flouté.png','png')

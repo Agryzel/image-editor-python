@@ -5,9 +5,9 @@ import numpy as np
 
 def flou(imgname):
     """
-    Cette fonction floutte une image
+    Cette fonction floutte une image.
 
-    :param: nom et type de l'immage à modifier ex: image.png
+    :param imgname: nom et type de l'immage à modifier ex: image.png
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     img=Image.open (f'immages-test/{imgname}')
@@ -18,7 +18,7 @@ def monochrome(imgname):
     """
     Cette fonction passe une image en monochrome
 
-    :param: nom et type de l'immage à modifier ex: image.png
+    :param imgname: nom et type de l'immage à modifier ex: image.png
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     img=Image.open (f'immages-test/{imgname}')
@@ -29,7 +29,7 @@ def dilatation(imgname):
     """
     Cette fonction dilate une image
 
-    :param: nom et type de l'immage à modifier ex: image.png
+    :param imgname: nom et type de l'immage à modifier ex: image.png
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     img = cv2.imread(f'immages-test/{imgname}')
@@ -41,8 +41,8 @@ def rotate(imgname,angle):
     """
     Cette fonction provoque la rotation d'une image
 
-    :param: nom et type de l'immage à modifier ex: image.png
-    :param: angle de rotation voulue de l'image ex: 180
+    :param imgname: nom et type de l'immage à modifier ex: image.png
+    :param angle: angle de rotation voulue de l'image ex: 180
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     img=Image.open (f'immages-test/{imgname}')
@@ -53,8 +53,8 @@ def text(imgname,text):
     """
     Cette fonction ajoute du text sur une image
 
-    :param: nom et type de l'immage à modifier ex: image.png
-    :param: text à ajouter sur l'image ex: "ceci est un text"
+    :param imgname: nom et type de l'immage à modifier ex: image.png
+    :param text: text à ajouter sur l'image ex: "ceci est un text"
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     img = cv2.imread(f'immages-test/{imgname}')

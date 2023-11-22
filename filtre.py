@@ -31,6 +31,5 @@ def text(imgname,text):
     fontScale = 1
     color = (0,0,0) 
     thickness = 2
-    imgchanged = cv2.putText(img, text, org, font,  
-                   fontScale, color, thickness, cv2.LINE_AA) 
+    imgchanged = cv2.putText(img, text, org, font, fontScale, color, thickness, cv2.LINE_AA) 
     cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)

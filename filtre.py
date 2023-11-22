@@ -4,6 +4,12 @@ import cv2
 import numpy as np
 
 def flou(imgname):
+    """
+    Cette fonction floutte une image
+
+    :param: nom et type de l'immage à modifier ex: image.png
+    :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
+    """
     try:
         # Essayer d'ouvrir l'image et d'appliquer le filtre flou
         img = Image.open(f'immages-test/{imgname}')
@@ -14,6 +20,12 @@ def flou(imgname):
         print(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {imgname} : {e}")
 
 def monochrome(imgname):
+    """
+    Cette fonction passe une image en monochrome
+
+    :param: nom et type de l'immage à modifier ex: image.png
+    :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
+    """
     try:
         # Essayer d'ouvrir l'image et de la convertir en monochrome
         img = Image.open(f'immages-test/{imgname}')
@@ -23,6 +35,12 @@ def monochrome(imgname):
         print(f"Une erreur s'est produite lors de l'application du filtre 'monochrome' à {imgname} : {e}")
 
 def dilatation(imgname):
+    """
+    Cette fonction dilate une image
+
+    :param: nom et type de l'immage à modifier ex: image.png
+    :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
+    """
 
     try:
         # Essayer de lire l'image avec OpenCV et d'appliquer la dilatation
@@ -40,6 +58,13 @@ def dilatation(imgname):
 
 
 def rotate(imgname, angle):
+    """
+    Cette fonction provoque la rotation d'une image
+
+    :param: nom et type de l'immage à modifier ex: image.png
+    :param: angle de rotation voulue de l'image ex: 180
+    :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
+    """
     try:
         # Essayer d'ouvrir l'image et de la faire tourner selon l'angle spécifié
         img = Image.open(f'immages-test/{imgname}')
@@ -91,6 +116,13 @@ def multiFiltre():
 multiFiltre()
 
 def text(imgname,text):
+    """
+    Cette fonction ajoute du text sur une image
+
+    :param: nom et type de l'immage à modifier ex: image.png
+    :param: text à ajouter sur l'image ex: "ceci est un text"
+    :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
+    """
     img = cv2.imread(f'immages-test/{imgname}')
     org = (50, 50) 
     font = 3

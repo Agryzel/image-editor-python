@@ -84,4 +84,4 @@ def commandLine(filters,input_folder,output_folder):
             
         else:
             print("La commande que vous venez d'effectuer n'existe pas \n Utilisez la commande -help filtre")
-
+    

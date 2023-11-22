@@ -1,17 +1,17 @@
-def log(msg):
-    """
-    Saves the msg in a log file {log_file} and prints it in the console.
-    :param msg: the message to be append in the log file
-    """
-    now = datetime.now()
-    timestamp = now.strftime('%Y/%m/%d %H:%M:%S')
-    formatted = f'{timestamp} - {msg}'
-    with open(filtre.log, 'a') as f:
-        f.write(formatted + '\n')
+from datetime import datetime
 
-def show_log():
+logFile = 'filtre.log'
+
+def log(msg):
+    now = datetime.now()
+    timestamp = now.strftime('%H:%M:%S %Y/%m/%d')
+    formatted = f'{timestamp} - {msg}'
+    with open(logFile, 'a') as logger:
+        logger.write(formatted + '\n')
+
+def display_log():
     try:
-        with open(logFile, 'r') as f:
-            print(f.read())
+        with open(logFile, 'r') as logger:
+            print(logger.read())
     except FileNotFoundError as e:
-        print(f'Cannot open {logFile}. error={e}')
+        print(f'Ne peut pas être lu : {logFile}. Erreur={e}')

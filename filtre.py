@@ -7,7 +7,7 @@ def flou(imgname):
     """
     Cette fonction floutte une image.
 
-    :param imgname: nom et type de l'immage à modifier ex: image.png
+    :param int imgname: nom et type de l'immage à modifier ex: "image.png"
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     try:
@@ -23,7 +23,7 @@ def monochrome(imgname):
     """
     Cette fonction passe une image en monochrome
 
-    :param imgname: nom et type de l'immage à modifier ex: image.png
+    :param imgname: nom et type de l'immage à modifier ex: "image.png"
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     try:
@@ -38,7 +38,7 @@ def dilatation(imgname):
     """
     Cette fonction dilate une image
 
-    :param imgname: nom et type de l'immage à modifier ex: image.png
+    :param imgname: nom et type de l'immage à modifier ex: "image.png"
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
 
@@ -61,7 +61,7 @@ def rotate(imgname, angle):
     """
     Cette fonction provoque la rotation d'une image
 
-    :param imgname: nom et type de l'immage à modifier ex: image.png
+    :param imgname: nom et type de l'immage à modifier ex: "image.png"
     :param angle: angle de rotation voulue de l'image ex: 180
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
@@ -123,13 +123,13 @@ def text(imgname,text):
     :param text: text à ajouter sur l'image ex: "ceci est un text"
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
-    img = cv2.imread(f'immages-test/{imgname}')
-    org = (50, 50) 
-    font = 3
-    fontScale = 1
-    color = (0,0,0) 
-    thickness = 2
-    imgchanged = cv2.putText(img, text, org, font,  
-                   fontScale, color, thickness, cv2.LINE_AA) 
+    img = cv2.imread(f'immages-test/{imgname}') # image à changer
+    org = (50, 50) # position du text par rapport au coin superieur gauche
+    font = 3 # police d'écriture
+    fontScale = 1 # taille du text
+    color = (0,0,0) # couleur
+    thickness = 2 # épaisseur du trait
+    imgchanged= cv2.putText(img, text, org, font,  
+                fontScale, color, thickness, cv2.LINE_AA) # image apprès changement
     cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
 

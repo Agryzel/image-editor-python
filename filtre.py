@@ -27,5 +27,7 @@ def rotate(imgname,angle):
 
 def redimention(imgname):
     img = Image.open (f'immages-test/{imgname}')
-    imgchanged = img.resize((256, 256))
-    imgchanged.save(f'./images-changed/{imgname}-flouté.png','png')
+    askLongueur = input("Saisir la longeur de l'image ")
+    askLargeur = input("Saisir la largeur de l'image ")
+    imgchanged = img.resize((int(askLongueur), int(askLargeur)))
+    imgchanged.save(f'./images-changed/{imgname}-redimensionné.png','png')

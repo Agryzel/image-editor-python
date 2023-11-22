@@ -8,7 +8,7 @@ def flou(imgname):
         # Essayer d'ouvrir l'image et d'appliquer le filtre flou
         img = Image.open(f'immages-test/{imgname}')
         imgchanged = img.filter(ImageFilter.BLUR)
-        imgchanged.save(f'./images-changed/{imgname}-floute.png', 'png')
+        imgchanged.save(f'./images-changed/{imgname}', 'png')
     except Exception as e:
         # En cas d'erreur
         print(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {imgname} : {e}")
@@ -18,7 +18,7 @@ def monochrome(imgname):
         # Essayer d'ouvrir l'image et de la convertir en monochrome
         img = Image.open(f'immages-test/{imgname}')
         imgchanged = img.convert('L')
-        imgchanged.save(f'./images-changed/{imgname}-monochrome.png', 'png')
+        imgchanged.save(f'./images-changed/{imgname}', 'png')
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'monochrome' à {imgname} : {e}")
 
@@ -29,14 +29,14 @@ def dilatation(imgname):
         img = cv2.imread(f'immages-test/{imgname}')
         kernel = np.ones((5, 5), np.uint8)
         imgchanged = cv2.dilate(img, kernel, iterations=1)
-        cv2.imwrite(f'./images-changed/{imgname}-dilatee.png', imgchanged)
+        cv2.imwrite(f'./images-changed/{imgname}', imgchanged)
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'dilatation' à {imgname} : {e}")
 
     img = cv2.imread(f'immages-test/{imgname}')
     kernel = np.ones((5,5), np.uint8)
     imgchanged=cv2.dilate(img, kernel, iterations=1)
-    cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
+    cv2.imwrite(f'./images-changed/{imgname}',imgchanged)
 
 
 def rotate(imgname, angle):
@@ -56,7 +56,7 @@ def redimension(imgname):
         askLongueur = input("Saisir la longueur de l'image ")
         askLargeur = input("Saisir la largeur de l'image ")
         imgchanged = img.resize((int(askLongueur), int(askLargeur)))
-        imgchanged.save(f'./images-changed/{imgname}-redimensionne.png', 'png')
+        imgchanged.save(f'./images-changed/{imgname}', 'png')
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'redimension' à {imgname} : {e}")
 
@@ -99,5 +99,12 @@ def text(imgname,text):
     thickness = 2
     imgchanged = cv2.putText(img, text, org, font,  
                    fontScale, color, thickness, cv2.LINE_AA) 
-    cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
+    cv2.imwrite(f'./images-changed/{imgname}',imgchanged)
+
+def aquarelle(imgname):
+    imgname="téléchargement (1).jpeg"
+    img = cv2.imread(f'immages-test/{imgname}')
+    kernel = np.ones((5, 5), np.uint8)
+    imgchanged = cv2.stylization(img)
+    cv2.imwrite(f'./images-changed/{imgname}', imgchanged)
 

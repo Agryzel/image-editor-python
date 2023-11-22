@@ -157,7 +157,7 @@ def text(imgname,text):
         color = (0,0,0) # couleur
         thickness = 2 # épaisseur du trait
         imgchanged= cv2.putText(img, text, org, font, fontScale, color, thickness, cv2.LINE_AA) # image apprès changement
-        cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
+        cv2.imwrite(f'./images-changed/{imgname}',imgchanged)
     except Exception as e:
         logger.log(f"Une erreur s'est produite lors de l'ajout de texte à l'image {imgname} : {e}")
         print(f"Une erreur s'est produite lors de l'ajout de texte à l'image {imgname} : {e}")
@@ -215,3 +215,11 @@ def faceDetector(imgname):
     except Exception as e:
         # Gestion des exceptions, affichage de l'erreur
         print(f"Une erreur s'est produite lors de la detection du visage : {e}")
+
+def aquarelle(imgname):
+    imgname="téléchargement (1).jpeg"
+    img = cv2.imread(f'immages-test/{imgname}')
+    kernel = np.ones((5, 5), np.uint8)
+    imgchanged = cv2.stylization(img)
+    cv2.imwrite(f'./images-changed/{imgname}', imgchanged)
+

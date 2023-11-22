@@ -4,31 +4,53 @@ import cv2
 import numpy as np
 
 def flou(imgname):
-    img=Image.open (f'immages-test/{imgname}')
-    imgchanged=img.filter(ImageFilter.BLUR)
-    imgchanged.save(f'./images-changed/{imgname}-flouté.png','png')
+    try:
+        # Essayer d'ouvrir l'image et d'appliquer le filtre flou
+        img = Image.open(f'immages-test/{imgname}')
+        imgchanged = img.filter(ImageFilter.BLUR)
+        imgchanged.save(f'./images-changed/{imgname}-floute.png', 'png')
+    except Exception as e:
+        # En cas d'erreur
+        print(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {imgname} : {e}")
 
 def monochrome(imgname):
-    img=Image.open (f'immages-test/{imgname}')
-    imgchanged=img.convert('L')
-    imgchanged.save(f'./images-changed/{imgname}-flouté.png','png')
+    try:
+        # Essayer d'ouvrir l'image et de la convertir en monochrome
+        img = Image.open(f'immages-test/{imgname}')
+        imgchanged = img.convert('L')
+        imgchanged.save(f'./images-changed/{imgname}-monochrome.png', 'png')
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de l'application du filtre 'monochrome' à {imgname} : {e}")
 
 def dilatation(imgname):
-    imgname='téléchargement.jpeg'
-    img = cv2.imread(f'immages-test/{imgname}')
-    kernel = np.ones((5,5), np.uint8)
-    imgchanged=cv2.dilate(img, kernel, iterations=1)
-    cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
+    try:
+        # Essayer de lire l'image avec OpenCV et d'appliquer la dilatation
+        img = cv2.imread(f'immages-test/{imgname}')
+        kernel = np.ones((5, 5), np.uint8)
+        imgchanged = cv2.dilate(img, kernel, iterations=1)
+        cv2.imwrite(f'./images-changed/{imgname}-dilatee.png', imgchanged)
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de l'application du filtre 'dilatation' à {imgname} : {e}")
 
-def rotate(imgname,angle):
-    img=Image.open (f'immages-test/{imgname}')
-    imgchanged= img.rotate(angle)
-    imgchanged.save(f'./images-changed/{imgname}-totate-{angle}°.png','png')
+def rotate(imgname, angle):
+    try:
+        # Essayer d'ouvrir l'image et de la faire tourner selon l'angle spécifié
+        img = Image.open(f'immages-test/{imgname}')
+        imgchanged = img.rotate(angle)
+        imgchanged.save(f'./images-changed/{imgname}-rotate-{angle}°.png', 'png')
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {imgname} : {e}")
 
-def redimention(imgname):
-    img = Image.open (f'immages-test/{imgname}')
-    imgchanged = img.resize((256, 256))
-    imgchanged.save(f'./images-changed/{imgname}-flouté.png','png')
+def redimension(imgname):
+    try:
+        # Essayer d'ouvrir l'image et de redimensionner selon les dimensions spécifiées
+        img = Image.open(f'immages-test/{imgname}')
+        askLongueur = input("Saisir la longueur de l'image ")
+        askLargeur = input("Saisir la largeur de l'image ")
+        imgchanged = img.resize((int(askLongueur), int(askLargeur)))
+        imgchanged.save(f'./images-changed/{imgname}-redimensionne.png', 'png')
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de l'application du filtre 'redimension' à {imgname} : {e}")
 
 def multiFiltre():
     tabPic = []
@@ -56,6 +78,6 @@ def multiFiltre():
                 rotate(tabPic[i], angle)
                 
             elif askFiltre == "redimension":
-                redimention(tabPic[i])
+                redimension(tabPic[i])
 
 multiFiltre()

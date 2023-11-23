@@ -222,4 +222,3 @@ def aquarelle(imgname):
     kernel = np.ones((5, 5), np.uint8)
     imgchanged = cv2.stylization(img)
     cv2.imwrite(f'./images-changed/{imgname}', imgchanged)
-

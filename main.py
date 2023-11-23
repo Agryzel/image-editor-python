@@ -103,9 +103,9 @@ def commandLine():
                     if filtre[0] == 'flou':
                         appliedfilters.append('flou')
                     if filtre[0] == 'gray':
-                        appliedfilters.append('monochrome')
+                        appliedfilters.append('gray')
                     if filtre[0] == 'rotate':
-                        appliedfilters.append(('rotate',filtre[1]))
+                        appliedfilters.append(('rotation',filtre[1]))
                     if filtre[0] == 'dilate':
                         appliedfilters.append('dilatation')
                     if filtre[0] == 'modify_size':
@@ -115,19 +115,19 @@ def commandLine():
                     if filtre[0] == 'aquarelle':
                         appliedfilters.append('aquarelle')
             if elements == '--i':
-                image = filter[index_element+1]
+                image = filters[index_element+1]
             if elements == '--o':
-                output_folder = filter[index_element+1]
-
+                output_folder = filters[index_element+1]
+        print(appliedfilters)
         #change image
         for j in appliedfilters:
             if j == 'flou':
                 flou(image)
             if j == 'gray':
                 monochrome(image)
-            if j[0] == 'rotate':
-                rotation(image,j[1])
-            if j == 'dilate':
+            if j[0] == 'rotation':
+                rotate(image,j[1])
+            if j == 'dilatation':
                 dilatation(image)
             if j[0] == 'modify_size':
                 appliedfilters.append(('modify',filtre[1]))

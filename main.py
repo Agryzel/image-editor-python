@@ -1,10 +1,10 @@
-import sys, logger, cv2
 from colorama import *
 import logger
-from PIL import Image
-from PIL import ImageFilter
+from PIL import Image, ImageFilter
 import cv2
+import sys
 import numpy as np
+import os
 
 args = sys.argv[1:]
 filters = sys.args[1:]

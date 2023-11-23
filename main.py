@@ -5,6 +5,7 @@ import cv2
 import sys
 import numpy as np
 import os
+from filtre import *
 
 args = sys.argv[1:]
 filters = sys.argv[1:]
@@ -12,49 +13,6 @@ input_folder = 'immages-test/'
 output_folder = './images-changed/'
 
 def commandLine():
-
-    print(sys.argv)
-
-    def flou(imgname):
-        img=Image.open (f'immages-test/{imgname}')
-        imgchanged=img.filter(ImageFilter.BLUR)
-        imgchanged.save(f'./images-changed/{imgname}-flouté.png','png')
-
-    def monochrome(imgname):
-        img=Image.open (f'immages-test/{imgname}')
-        imgchanged=img.convert('L')
-        imgchanged.save(f'./images-changed/{imgname}-black_white.png','png')
-
-    def dilatation(imgname):
-        img = cv2.imread(f'immages-test/{imgname}')
-        kernel = np.ones((5,5), np.uint8)
-        imgchanged=cv2.dilate(img, kernel, iterations=1)
-        cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
-
-    def rotate(imgname,angle):
-        img=Image.open (f'immages-test/{imgname}')
-        imgchanged= img.rotate(angle)
-        imgchanged.save(f'./images-changed/{imgname}-rotate-{angle}°.png','png')
-
-    def text(imgname,text):
-        img = cv2.imread(f'immages-test/{imgname}')
-        org = (50, 50) 
-        font = 3
-        fontScale = 1
-        color = (0,0,0) 
-        thickness = 2
-        imgchanged = cv2.putText(img, text, org, font, fontScale, color, thickness, cv2.LINE_AA) 
-        cv2.imwrite(f'./images-changed/{imgname}-written.png',imgchanged)
-
-    def redimension(imgname):
-        try:
-            img = Image.open(f'immages-test/{imgname}')
-            askLongueur = input("Saisir la longueur de l'image ")
-            askLargeur = input("Saisir la largeur de l'image ")
-            imgchanged = img.resize((int(askLongueur), int(askLargeur)))
-            imgchanged.save(f'./images-changed/{imgname}-redimensionne.png', 'png')
-        except Exception as e:
-            print(f"Une erreur s'est produite lors de l'application du filtre 'redimension' à {imgname} : {e}")
 
     if args[0] == '-log':
                 logger.display_log()
@@ -138,6 +96,4 @@ def commandLine():
     else:
         print("La commande que vous venez d'effectuer n'existe pas \n Utilisez la commande -help")
 
-                
-        
 commandLine()

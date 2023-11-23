@@ -44,4 +44,3 @@ if len(args) == 3:
         
     else:
         print("La commande que vous venez d'effectuer n'existe pas \n Utilisez la commande -help filtre")
-

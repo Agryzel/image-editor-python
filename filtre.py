@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import logger
 import os
+import matplotlib.pyplot as plt
 
 def flou(imgname):
     """
@@ -190,3 +191,34 @@ def gif(doc):
         # En cas d'erreur, enregistrer le message d'erreur
         logger.log(f"Une erreur s'est produite lors de l'execution du programme de gif : {e}")
         print(f"Une erreur s'est produite lors de l'execution du programme de gif : {e}")
+
+def faceDetector(imgname):
+    try:
+        # Chargement de l'image depuis le fichier spécifié
+        img = cv2.imread(imgname)
+
+        # Conversion de l'image en niveaux de gris
+        gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        # Chargement du classificateur en cascade pour la détection de visages
+        face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+
+        # Détection des visages dans l'image en niveaux de gris
+        face = face_classifier.detectMultiScale(gray_image, scaleFactor=1.1, minNeighbors=5, minSize=(40, 40))
+
+        # Dessine des rectangles autour des visages détectés dans l'image originale
+        for (x, y, w, h) in face:
+            cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 4)
+
+        # Conversion de l'image de l'espace de couleur BGR à RGB pour l'affichage avec matplotlib
+        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+        # Affichage de l'image résultante avec les rectangles entourant les visages
+        plt.figure(figsize=(20,10))
+        plt.imshow(img_rgb)
+        plt.axis('off')
+        plt.show()
+
+    except Exception as e:
+        # Gestion des exceptions, affichage de l'erreur
+        print(f"Une erreur s'est produite lors de la detection du visage : {e}")

@@ -133,3 +133,22 @@ def text(imgname,text):
                 fontScale, color, thickness, cv2.LINE_AA) # image apprès changement
     cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
 
+def gif(doc):
+    try:
+        images = []
+
+        # Lire chaque fichier dans le dossier spécifié
+        for filename in os.listdir(doc):
+            img_path = os.path.join(doc, filename)
+            images.append(Image.open(str(img_path)))
+
+        # Sauvegarder les images en tant que GIF
+        images[0].save('images-changed/paysage.gif', save_all=True, append_images=images[1:], duration=500, loop=0)
+
+        logger.log(f"Le gif a bien été crée avec les images : {images}")
+
+
+    except Exception as e:
+        # En cas d'erreur, enregistrer le message d'erreur
+        logger.log(f"Une erreur s'est produite lors de l'execution du programme de gif : {e}")
+        print(f"Une erreur s'est produite lors de l'execution du programme de gif : {e}")

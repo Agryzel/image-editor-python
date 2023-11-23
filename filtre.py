@@ -108,8 +108,6 @@ def multiFiltre():
             elif askFiltre == "redimension":
                 redimension(tabPic[i])
 
-multiFiltre()
-
 def text(imgname,text):
     """
     Cette fonction ajoute du text sur une image

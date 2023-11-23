@@ -14,6 +14,8 @@ output_folder = './images-changed/'
 
 def commandLine():
 
+    print(sys.argv)
+
     if args[0] == '-log':
                 logger.display_log()
                 print(args)
@@ -88,9 +90,9 @@ def commandLine():
             if j == 'dilatation':
                 dilatation(image)
             if j[0] == 'modify_size':
-                appliedfilters.append(('modify',filtre[1]))
+                redimension(image,j[1])
             if j[0] == 'text':
-                appliedfilters.append(('text',filtre[1]))
+                text(image,j[1])
             if j == 'aquarelle':
                aquarelle(image)
     else:

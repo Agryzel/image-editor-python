@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 Pillow
 numpy
 opencv-python
+=======
+Pillow==8.3.2
+opencv-python==4.5.3
+numpy==1.21.1
+# pip install -r requirements.txt
+>>>>>>> 88a6911d587b9aaa68c988b719ccb289d07483b0

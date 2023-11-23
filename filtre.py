@@ -132,4 +132,3 @@ def text(imgname,text):
     imgchanged= cv2.putText(img, text, org, font,  
                 fontScale, color, thickness, cv2.LINE_AA) # image apprès changement
     cv2.imwrite(f'./images-changed/{imgname}-dilatée.png',imgchanged)
-

@@ -94,7 +94,7 @@ def commandLine():
             if j[0] == 'text':
                 text(image,j[1])
             if j == 'aquarelle':
-               aquarelle(image)
+                aquarelle(image)
     else:
         print("La commande que vous venez d'effectuer n'existe pas \n Utilisez la commande -help")
 

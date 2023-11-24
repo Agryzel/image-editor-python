@@ -12,7 +12,7 @@ filters = sys.argv[1:]
 input_folder = 'immages-test/'
 output_folder = './images-changed/'
 
-def commandLine():
+def commandLine(input_folder):
 
     print(sys.argv)
 
@@ -80,22 +80,29 @@ def commandLine():
                 output_folder = filters[index_element+1]
         print(appliedfilters)
         #change image
+        modified_image = image
+        tour=0
         for j in appliedfilters:
+            if tour>0:
+                input_folder = './{output_folder}'
+                modified_image = Image.open(f'{input_folder},{image}')
             if j == 'flou':
-                flou(image)
+                modified_image = flou(modified_image)
             if j == 'gray':
-                monochrome(image)
+                modified_image = monochrome(modified_image)
             if j[0] == 'rotation':
-                rotate(image,j[1])
+                modified_image = rotate(modified_image,j[1])
             if j == 'dilatation':
-                dilatation(image)
+                modified_image = dilatation(modified_image)
             if j[0] == 'modify_size':
-                redimension(image,j[1])
+                modified_image = redimension(modified_image,j[1])
             if j[0] == 'text':
-                text(image,j[1])
+                modified_image = text(modified_image,j[1])
             if j == 'aquarelle':
-               aquarelle(image)
+                modified_image = aquarelle(modified_image)
+            tour+=1
+        modified_image.save(f'./{output_folder}/{modified_image}.png', 'png')
     else:
         print("La commande que vous venez d'effectuer n'existe pas \n Utilisez la commande -help")
 
-commandLine()
+commandLine('immages-test/')

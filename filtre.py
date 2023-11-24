@@ -6,7 +6,7 @@ import logger
 import os
 import matplotlib.pyplot as plt
 
-def flou(imgname):
+def flou(img):
     """
     Cette fonction floutte une image.
 
@@ -15,17 +15,17 @@ def flou(imgname):
     """
     try:
         # Essayer d'ouvrir l'image et d'appliquer le filtre flou
-        img = Image.open(f'immages-test/{imgname}')
+        
         imgchanged = img.filter(ImageFilter.BLUR)
-        imgchanged.save(f'./images-changed/{imgname}-floute.png', 'png')
         logger.log(f"Un effect de flou a été appliquer à {imgname}")
+        return imgchanged
 
     except Exception as e:
         # En cas d'erreur
         print(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {imgname} : {e}")
         logger.log(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {imgname} : {e}")
 
-def monochrome(imgname):
+def monochrome(img):
     """
     Cette fonction passe une image en monochrome
 
@@ -34,15 +34,15 @@ def monochrome(imgname):
     """
     try:
         # Essayer d'ouvrir l'image et de la convertir en monochrome
-        img = Image.open(f'immages-test/{imgname}')
+        
         imgchanged = img.convert('L')
-        imgchanged.save(f'./images-changed/{imgname}-monochrome.png', 'png')
         logger.log(f"{imgname} à été mise en noir et blanc")
+        return imgchanged
 
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'monochrome' à {imgname} : {e}")
 
-def dilatation(imgname):
+def dilatation(img):
     """
     Cette fonction dilate une image
 
@@ -52,17 +52,17 @@ def dilatation(imgname):
 
     try:
         # Essayer de lire l'image avec OpenCV et d'appliquer la dilatation
-        img = cv2.imread(f'immages-test/{imgname}')
+        
         kernel = np.ones((5, 5), np.uint8)
         imgchanged = cv2.dilate(img, kernel, iterations=1)
-        cv2.imwrite(f'./images-changed/{imgname}-dilatee.png', imgchanged)
         logger.log(f"Un effect de dilatation a été appliquer à {imgname}")
+        return imgchanged
 
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'dilatation' à {imgname} : {e}")
 
 
-def rotate(imgname, angle):
+def rotate(img, angle):
     """
     Cette fonction provoque la rotation d'une image
 
@@ -72,25 +72,25 @@ def rotate(imgname, angle):
     """
     try:
         # Essayer d'ouvrir l'image et de la faire tourner selon l'angle spécifié
-        img = Image.open(f'immages-test/{imgname}')
+        
         imgchanged = img.rotate(angle)
-        imgchanged.save(f'./images-changed/{imgname}-rotate-{angle}°.png', 'png')
         logger.log(f"Une retation de {angle}° a été appliquer à {imgname}")
+        return imgchanged
 
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {imgname} : {e}")
         logger.log(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {imgname} : {e}")
 
 
-def redimension(imgname):
+def redimension(img):
     try:
         # Essayer d'ouvrir l'image et de redimensionner selon les dimensions spécifiées
-        img = Image.open(f'immages-test/{imgname}')
+        
         askLongueur = input("Saisir la longueur de l'image ")
         askLargeur = input("Saisir la largeur de l'image ")
         imgchanged = img.resize((int(askLongueur), int(askLargeur)))
-        imgchanged.save(f'./images-changed/{imgname}-redimensionne.png', 'png')
         logger.log(f"Un effect de flou a été appliquer à {imgname}")
+        return imgchanged
 
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'redimension' à {imgname} : {e}")
@@ -141,7 +141,7 @@ def multiFiltre():
         print(f"Une erreur s'est produite lors de l'application du filtre {askFiltre} à la liste d'images : {tabPic} : {e}")
 
 
-def text(imgname,text):
+def text(img,text):
     """
     Cette fonction ajoute du text sur une image
 
@@ -150,14 +150,14 @@ def text(imgname,text):
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     try:
-        img = cv2.imread(f'immages-test/{imgname}') # image à changer
+         # image à changer
         org = (50, 50) # position du text par rapport au coin superieur gauche
         font = 3 # police d'écriture
         fontScale = 1 # taille du text
         color = (0,0,0) # couleur
         thickness = 2 # épaisseur du trait
         imgchanged= cv2.putText(img, text, org, font, fontScale, color, thickness, cv2.LINE_AA) # image apprès changement
-        cv2.imwrite(f'./images-changed/{imgname}',imgchanged)
+        return imgchanged
     except Exception as e:
         logger.log(f"Une erreur s'est produite lors de l'ajout de texte à l'image {imgname} : {e}")
         print(f"Une erreur s'est produite lors de l'ajout de texte à l'image {imgname} : {e}")
@@ -185,7 +185,7 @@ def gif(doc):
         logger.log(f"Une erreur s'est produite lors de l'execution du programme de gif : {e}")
         print(f"Une erreur s'est produite lors de l'execution du programme de gif : {e}")
 
-def faceDetector(imgname):
+def faceDetector(img):
     try:
         # Chargement de l'image depuis le fichier spécifié
         img = cv2.imread(imgname)
@@ -216,9 +216,8 @@ def faceDetector(imgname):
         # Gestion des exceptions, affichage de l'erreur
         print(f"Une erreur s'est produite lors de la detection du visage : {e}")
 
-def aquarelle(imgname):
-    imgname="téléchargement (1).jpeg"
-    img = cv2.imread(f'immages-test/{imgname}')
+def aquarelle(img):
+    
     kernel = np.ones((5, 5), np.uint8)
     imgchanged = cv2.stylization(img)
-    cv2.imwrite(f'./images-changed/{imgname}', imgchanged)
+    return imgchanged

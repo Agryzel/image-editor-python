@@ -10,7 +10,7 @@ from filtre import *
 args = sys.argv[1:]
 filters = sys.argv[1:]
 input_folder = 'immages-test/'
-output_folder = './images-changed/'
+output_folder = 'images-changed/'
 
 def commandLine(input_folder):
 
@@ -65,13 +65,13 @@ def commandLine(input_folder):
                     if filtre[0] == 'gray':
                         appliedfilters.append('gray')
                     if filtre[0] == 'rotate':
-                        appliedfilters.append(('rotation',filtre[1]))
+                        appliedfilters.append(['rotation',filtre[1]])
                     if filtre[0] == 'dilate':
                         appliedfilters.append('dilatation')
                     if filtre[0] == 'modify_size':
                        appliedfilters.append(('modify_size',filtre[1]))
                     if filtre[0] == 'text':
-                        appliedfilters.append('text',filtre[1])
+                        appliedfilters.append(['text',filtre[1]])
                     if filtre[0] == 'aquarelle':
                         appliedfilters.append('aquarelle')
             if elements == '--i':
@@ -80,28 +80,29 @@ def commandLine(input_folder):
                 output_folder = filters[index_element+1]
         print(appliedfilters)
         #change image
-        modified_image = image
-        tour=0
+        modified_image = Image.open(f'{input_folder}{image}')
+        image_np = cv2.cvtColor(np.array(modified_image), cv2.COLOR_RGB2BGR)
+        print(modified_image)
         for j in appliedfilters:
-            if tour>0:
-                input_folder = './{output_folder}'
-                modified_image = Image.open(f'{input_folder},{image}')
             if j == 'flou':
                 modified_image = flou(modified_image)
             if j == 'gray':
                 modified_image = monochrome(modified_image)
             if j[0] == 'rotation':
-                modified_image = rotate(modified_image,j[1])
+                modified_image = rotate(modified_image,int(j[1]))
             if j == 'dilatation':
                 modified_image = dilatation(modified_image)
+                modified_image = Image.fromarray(cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB))
             if j[0] == 'modify_size':
                 modified_image = redimension(modified_image,j[1])
             if j[0] == 'text':
-                modified_image = text(modified_image,j[1])
+                modified_image = text(image_np,j[1])
+                modified_image = Image.fromarray(cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB))
             if j == 'aquarelle':
                 modified_image = aquarelle(modified_image)
-            tour+=1
-        modified_image.save(f'./{output_folder}/{modified_image}.png', 'png')
+                modified_image = Image.fromarray(cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB))
+        print(modified_image,output_folder,image)
+        modified_image.save(f'./{output_folder}{image}', 'png')
     else:
         print("La commande que vous venez d'effectuer n'existe pas \n Utilisez la commande -help")
 

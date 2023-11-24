@@ -17,13 +17,13 @@ def flou(img):
         # Essayer d'ouvrir l'image et d'appliquer le filtre flou
         
         imgchanged = img.filter(ImageFilter.BLUR)
-        logger.log(f"Un effect de flou a été appliquer à {imgname}")
+        logger.log(f"Un effect de flou a été appliquer à {img}")
         return imgchanged
 
     except Exception as e:
         # En cas d'erreur
-        print(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {imgname} : {e}")
-        logger.log(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {imgname} : {e}")
+        print(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {img} : {e}")
+        logger.log(f"Une erreur s'est produite lors de l'application du filtre 'flou' à {img} : {e}")
 
 def monochrome(img):
     """
@@ -36,11 +36,11 @@ def monochrome(img):
         # Essayer d'ouvrir l'image et de la convertir en monochrome
         
         imgchanged = img.convert('L')
-        logger.log(f"{imgname} à été mise en noir et blanc")
+        logger.log(f"{img} à été mise en noir et blanc")
         return imgchanged
 
     except Exception as e:
-        print(f"Une erreur s'est produite lors de l'application du filtre 'monochrome' à {imgname} : {e}")
+        print(f"Une erreur s'est produite lors de l'application du filtre 'monochrome' à {img} : {e}")
 
 def dilatation(img):
     """
@@ -49,17 +49,16 @@ def dilatation(img):
     :param imgname: nom et type de l'immage à modifier ex: "image.png"
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
-
     try:
         # Essayer de lire l'image avec OpenCV et d'appliquer la dilatation
         
-        kernel = np.ones((5, 5), np.uint8)
+        kernel = np.ones((10,10), np.uint8)
         imgchanged = cv2.dilate(img, kernel, iterations=1)
-        logger.log(f"Un effect de dilatation a été appliquer à {imgname}")
+        logger.log(f"Un effect de dilatation a été appliquer à {img}")
         return imgchanged
 
     except Exception as e:
-        print(f"Une erreur s'est produite lors de l'application du filtre 'dilatation' à {imgname} : {e}")
+        print(f"Une erreur s'est produite lors de l'application du filtre 'dilatation' à {img} : {e}")
 
 
 def rotate(img, angle):
@@ -72,14 +71,13 @@ def rotate(img, angle):
     """
     try:
         # Essayer d'ouvrir l'image et de la faire tourner selon l'angle spécifié
-        
         imgchanged = img.rotate(angle)
-        logger.log(f"Une retation de {angle}° a été appliquer à {imgname}")
         return imgchanged
+        logger.log(f"Une rotation de {angle}° a été appliquer à {img}")
 
     except Exception as e:
-        print(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {imgname} : {e}")
-        logger.log(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {imgname} : {e}")
+        print(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {img} : {e}")
+        logger.log(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {img} : {e}")
 
 
 def redimension(img):
@@ -150,17 +148,16 @@ def text(img,text):
     :return: ne retourne rien, mais range l'immage modifier dans le dossier "immages-changed"
     """
     try:
-         # image à changer
         org = (50, 50) # position du text par rapport au coin superieur gauche
         font = 3 # police d'écriture
         fontScale = 1 # taille du text
         color = (0,0,0) # couleur
         thickness = 2 # épaisseur du trait
         imgchanged= cv2.putText(img, text, org, font, fontScale, color, thickness, cv2.LINE_AA) # image apprès changement
-        return imgchanged
+        cv2.imwrite(f'./images-changed/{img}',imgchanged)
     except Exception as e:
-        logger.log(f"Une erreur s'est produite lors de l'ajout de texte à l'image {imgname} : {e}")
-        print(f"Une erreur s'est produite lors de l'ajout de texte à l'image {imgname} : {e}")
+        logger.log(f"Une erreur s'est produite lors de l'ajout de texte à l'image {img} : {e}")
+        print(f"Une erreur s'est produite lors de l'ajout de texte à l'image {img} : {e}")
 
 def gif(doc):
     """

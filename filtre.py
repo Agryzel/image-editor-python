@@ -75,22 +75,25 @@ def rotate(imgname, angle):
         img = Image.open(f'immages-test/{imgname}')
         imgchanged = img.rotate(angle)
         imgchanged.save(f'./images-changed/{imgname}-rotate-{angle}°.png', 'png')
-        logger.log(f"Une retation de {angle}° a été appliquer à {imgname}")
+        logger.log(f"Une rotation de {angle}° a été appliquer à {imgname}")
 
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {imgname} : {e}")
         logger.log(f"Une erreur s'est produite lors de l'application du filtre 'rotate' à {imgname} : {e}")
 
 
-def redimension(imgname):
+def redimension(imgname,size):
     try:
         # Essayer d'ouvrir l'image et de redimensionner selon les dimensions spécifiées
         img = Image.open(f'immages-test/{imgname}')
-        askLongueur = input("Saisir la longueur de l'image ")
-        askLargeur = input("Saisir la largeur de l'image ")
-        imgchanged = img.resize((int(askLongueur), int(askLargeur)))
-        imgchanged.save(f'./images-changed/{imgname}-redimensionne.png', 'png')
-        logger.log(f"Un effect de flou a été appliquer à {imgname}")
+        height = img.height
+        width = img.width
+        new_width = width * size
+        new_height = height * size
+        imgchanged = img.resize((new_width, new_height))
+        imgchanged.save(f'./images-changed/{imgname}', 'png')
+        logger.log(f"Un aggrandissement X{size} a été appliquer à {imgname}")
+
 
     except Exception as e:
         print(f"Une erreur s'est produite lors de l'application du filtre 'redimension' à {imgname} : {e}")

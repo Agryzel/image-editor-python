@@ -14,11 +14,8 @@ output_folder = './images-changed/'
 
 def commandLine():
 
-    print(sys.argv)
-
     if args[0] == '-log':
-                logger.display_log()
-                print(args)
+        logger.display_log()
 
     elif "--help" in args:
         if len(args) > 2:
@@ -65,13 +62,13 @@ def commandLine():
                     if filtre[0] == 'gray':
                         appliedfilters.append('gray')
                     if filtre[0] == 'rotate':
-                        appliedfilters.append(('rotation',filtre[1]))
+                        appliedfilters.append(['rotation',filtre[1]])
                     if filtre[0] == 'dilate':
                         appliedfilters.append('dilatation')
                     if filtre[0] == 'modify_size':
-                       appliedfilters.append(('modify_size',filtre[1]))
+                       appliedfilters.append(['modify_size',filtre[1]])
                     if filtre[0] == 'text':
-                        appliedfilters.append('text',filtre[1])
+                        appliedfilters.append(['text',filtre[1]])
                     if filtre[0] == 'aquarelle':
                         appliedfilters.append('aquarelle')
             if elements == '--i':
@@ -86,11 +83,11 @@ def commandLine():
             if j == 'gray':
                 monochrome(image)
             if j[0] == 'rotation':
-                rotate(image,j[1])
+                rotate(image,int(j[1]))
             if j == 'dilatation':
                 dilatation(image)
             if j[0] == 'modify_size':
-                redimension(image,j[1])
+                redimension(image,int(j[1]))
             if j[0] == 'text':
                 text(image,j[1])
             if j == 'aquarelle':
